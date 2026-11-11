@@ -17,8 +17,8 @@ public class PortController {
 
     // Get para ver o resultado da apia
     @GetMapping("/cotacao")
-    public List<String> buscarCotacao() {
-        return twelveRequest.puxarDadosTwelve();
+    public String buscarCotacao() {
+        return twelveRequest.puxarDadosTwelve("AAPLS");
     }
 
 
