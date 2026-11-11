@@ -20,7 +20,7 @@ public class TwelveDataRequest {
         // Tratamento de erros
         try {
             String url = String.format(
-                "https://api.twelvedata.com/quote?symbol=AAPL&apikey=%s",
+                "https://api.twelvedata.com/price?symbol=AAPL&apikey=%s",
                 this.apiKey
             );
 
