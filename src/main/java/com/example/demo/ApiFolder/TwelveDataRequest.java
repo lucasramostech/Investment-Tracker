@@ -1,5 +1,9 @@
 package com.example.demo.ApiFolder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -12,19 +16,26 @@ public class TwelveDataRequest {
     @Value("${twelvedata.api.key}")
     private String apiKey;
 
+    @Value("${tickers}")
+    private String ticker;
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     // Metodo que vai puxar os dados da API do twelve Data;
-    public String puxarDadosTwelve() {
+    public List<String> puxarDadosTwelve() {
+        List<String> respostas = new ArrayList<>();
 
         // Tratamento de erros
         try {
-            String url = String.format(
-                "https://api.twelvedata.com/price?symbol=AAPL&apikey=%s",
-                this.apiKey
-            );
-
-            return restTemplate.getForObject(url, String.class);
+            for (String acao : Arrays.asList(ticker.split(","))) {
+                String url = String.format(
+                    "https://api.twelvedata.com/price?symbol=%s&apikey=%s",
+                    acao.trim().toUpperCase(),
+                    this.apiKey
+                );
+                respostas.add(restTemplate.getForObject(url, String.class));
+            }
+            return respostas;
         } catch (RestClientException exception) {
             throw new IllegalStateException("Erro ao consultar a Twelve Data.", exception);
         } finally {

@@ -1,7 +1,8 @@
 package com.example.demo.Controllers;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.ApiFolder.TwelveDataRequest;
 
@@ -16,7 +17,7 @@ public class PortController {
 
     // Get para ver o resultado da apia
     @GetMapping("/cotacao")
-    public String buscarCotacao() {
+    public List<String> buscarCotacao() {
         return twelveRequest.puxarDadosTwelve();
     }
 
