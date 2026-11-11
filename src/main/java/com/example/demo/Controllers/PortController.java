@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.demo.ApiFolder.*;;
+import com.example.demo.ApiFolder.*;
 
 @RestController
 public class PortController {
