@@ -25,7 +25,9 @@ public class TwelveDataRequest {
                 this.apiKey
             );
 
-            return restTemplate.getForObject(url, String.class);
+            String resposta = restTemplate.getForObject(url, String.class);
+            System.out.println("Resposta da Twelve Data: " + resposta);
+            return resposta;
         } catch (RestClientException exception) {
             throw new IllegalStateException("Erro ao consultar a Twelve Data.", exception);
         } finally {

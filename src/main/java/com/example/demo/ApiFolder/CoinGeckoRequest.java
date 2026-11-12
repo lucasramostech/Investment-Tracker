@@ -29,11 +29,13 @@ public class CoinGeckoRequest {
                 tickersCrypto.trim().toLowerCase()
             );
 
-            return restTemplate.getForObject(url, Map.class);
+            Map<String, Map<String, Double>> resposta = restTemplate.getForObject(url, Map.class);
+            System.out.println("Resposta da CoinGecko: " + resposta);
+            return resposta;
         } catch (RestClientException exception) {
-            throw new IllegalStateException("Erro ao consultar a Twelve Data.", exception);
+            throw new IllegalStateException("Erro ao consultar a CoinGecko.", exception);
         } finally {
-            System.out.println("Consulta à Twelve Data finalizada.");
+            System.out.println("Consulta à CoinGecko finalizada.");
         }
 
     }

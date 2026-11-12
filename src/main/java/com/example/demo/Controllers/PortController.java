@@ -19,11 +19,8 @@ public class PortController {
 
     // Get para ver o resultado da apia
     @GetMapping("/cotacao")
-    public Object[] buscarCotacao() {
-        Object[] datas = {
-            twelveRequest.puxarDadosTwelve("AAPL"),
-            coinRequest.puxarDadosGecko()
-        };
+    public String buscarCotacao() {
+        String datas = "teste";
 
         return datas;
     }
