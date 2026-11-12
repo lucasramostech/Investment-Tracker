@@ -14,18 +14,25 @@ public class ScheduledFile {
     // Injeção
     private final CoinGeckoRequest coinRequest;
     private final TwelveDataRequest twelveRequest;
+    private final BrapiRequest brapiRequest;
 
     // Lista twelve data
     @Value("${tickers}")
     private List<String> tickers;
 
+    @Value("${tickersBr}")
+    private List<String> tickersBr;
+
     private int tickerIndex;
+    private int tickerBrIndex;
 
 
     // Construtor
-    public ScheduledFile(CoinGeckoRequest coinRequest, TwelveDataRequest twelveRequest) {
+    public ScheduledFile(CoinGeckoRequest coinRequest, TwelveDataRequest twelveRequest,
+            BrapiRequest brapiRequest) {
         this.twelveRequest = twelveRequest;
         this.coinRequest = coinRequest;
+        this.brapiRequest = brapiRequest;
     }
 
     // Agendamento pra consumo de api
@@ -39,7 +46,12 @@ public class ScheduledFile {
         System.out.println("Consultando Twelve Data: " + ticker);
         datas.add(twelveRequest.puxarDadosTwelve(ticker));
 
+        String tickerBr = tickersBr.get(tickerBrIndex);
+        System.out.println("Consultando Brapi: " + tickerBr);
+        datas.add(brapiRequest.puxarDadosBrapi(tickerBr));
+
         tickerIndex = (tickerIndex + 1) % tickers.size();
+        tickerBrIndex = (tickerBrIndex + 1) % tickersBr.size();
 
         if (tickerIndex == 0) {
             System.out.println("Consultando CoinGecko após atualizar todos os tickers.");
