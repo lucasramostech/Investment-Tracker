@@ -22,6 +22,8 @@ public class CoinGeckoRequest {
     // Função que vai puxar as cryptos
     public Map<String, Map<String, Double>> puxarDadosGecko() {
 
+        System.out.println("\n===================== COINGECKO =====================");
+
         // Tratamento de erros
         try {
             String url = String.format(
@@ -30,12 +32,12 @@ public class CoinGeckoRequest {
             );
 
             Map<String, Map<String, Double>> resposta = restTemplate.getForObject(url, Map.class);
-            System.out.println("Resposta da CoinGecko: " + resposta);
+            System.out.println("Resposta: " + resposta);
             return resposta;
         } catch (RestClientException exception) {
             throw new IllegalStateException("Erro ao consultar a CoinGecko.", exception);
         } finally {
-            System.out.println("Consulta à CoinGecko finalizada.");
+            System.out.println("======================================================\n");
         }
 
     }

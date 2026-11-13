@@ -25,6 +25,9 @@ public class BrapiRequest {
     // Função que vai puxar os dados
     public Double puxarDadosBrapi(String ticker) {
 
+        System.out.println("\n======================= BRAPI =======================");
+        System.out.println("Ticker: " + ticker.trim().toUpperCase());
+
         // Tratamento de erros
         try {
             String url = String.format(
@@ -41,16 +44,12 @@ public class BrapiRequest {
 
             Double preco = ((Number) results.get(0).get("regularMarketPrice")).doubleValue();
 
-            System.out.println("Preço da Brapi: " + preco);
+            System.out.println("Preço: " + preco);
             return preco;
-
-
-
-
         } catch (RestClientException exception) {
             throw new IllegalStateException("Erro ao consultar a Brapi.", exception);
         } finally {
-            System.out.println("Consulta à Brapi finalizada.");
+            System.out.println("======================================================\n");
         }
 
     }

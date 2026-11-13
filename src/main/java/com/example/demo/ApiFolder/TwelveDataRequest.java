@@ -16,7 +16,10 @@ public class TwelveDataRequest {
 
     // Metodo que vai puxar os dados da API do twelve Data;
     public String puxarDadosTwelve(String ticker) {
-        
+
+        System.out.println("\n==================== TWELVE DATA ====================");
+        System.out.println("Ticker: " + ticker.trim().toUpperCase());
+
         // Tratamento de erros
         try {
             String url = String.format(
@@ -26,12 +29,12 @@ public class TwelveDataRequest {
             );
 
             String resposta = restTemplate.getForObject(url, String.class);
-            System.out.println("Resposta da Twelve Data: " + resposta);
+            System.out.println("Resposta: " + resposta);
             return resposta;
         } catch (RestClientException exception) {
             throw new IllegalStateException("Erro ao consultar a Twelve Data.", exception);
         } finally {
-            System.out.println("Consulta à Twelve Data finalizada.");
+            System.out.println("======================================================\n");
         }
     }
 }
