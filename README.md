@@ -11,11 +11,10 @@ apoiar o acompanhamento e a tomada de decisões.
 O projeto consulta cotações por meio de APIs externas e está sendo estruturado
 para acompanhar ações brasileiras, ações americanas e criptomoedas.
 
-## Versão 0.1
+## Versão 0.2
 
-A versão inicial implementa a integração básica com a Twelve Data, a Brapi e a
-CoinGecko. As consultas são executadas automaticamente em segundo plano pelo
-Spring Scheduler.
+A versão 0.2 mantém a integração básica com a Twelve Data, a Brapi e a
+CoinGecko e inicia a estrutura de persistência dos ativos com Spring Data JPA.
 
 Nesta versão:
 
@@ -25,8 +24,13 @@ Nesta versão:
 - Depois que todos os tickers da lista são consultados, a CoinGecko é
   consultada;
 - As respostas das APIs são exibidas no console da aplicação;
+- A entidade `Ativo` representa os ativos na tabela `ativos`;
+- O `Repository` permite consultar e persistir ativos;
+- O PostgreSQL é utilizado como banco de dados da aplicação;
+- A persistência das cotações coletadas pelos schedulers ainda será
+  implementada;
 - O endpoint `GET /cotacao` está disponível para testes e retorna
-  `teste`;
+  `teste`.
 
 ## Tecnologias
 
@@ -34,7 +38,8 @@ Nesta versão:
 - Spring Boot 4.1.2;
 - Spring Web MVC;
 - Maven;
-- PostgreSQL (dependência disponível para as próximas etapas);
+- PostgreSQL;
+- Spring Data JPA;
 - Twelve Data;
 - CoinGecko;
 - Brapi.
@@ -45,9 +50,14 @@ Nesta versão:
 - CoinGecko;
 - Brapi.
 
+
 ## Como executar
 
-Aguarde a versão 1.0 para deploy
+Com o PostgreSQL configurado, execute:
+
+```bash
+./mvnw spring-boot:run
+```
 
 
 ## Estrutura principal
@@ -63,10 +73,15 @@ demo/
     │   │   │   ├── BrapiRequest.java
     │   │   │   ├── CoinGeckoRequest.java
     │   │   │   └── TwelveDataRequest.java
+    │   │   │   ├── DatabaseFolder/
+    │   │   │   │   ├── Ativo.java
+    │   │   │   │   └── Repository.java
     │   │   ├── Controllers/
     │   │   │   └── PortController.java
     │   │   ├── Scheduleds/
-    │   │   │   └── ScheduledFile.java
+    │   │   │   ├── ScheduledBrapi.java
+    │   │   │   ├── ScheduledGecko.java
+    │   │   │   └── ScheduledTwelve.java
     │   │   └── DemoApplication.java
     │   └── resources/
     │       └── application.properties
