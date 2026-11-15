@@ -11,10 +11,10 @@ apoiar o acompanhamento e a tomada de decisões.
 O projeto consulta cotações por meio de APIs externas e está sendo estruturado
 para acompanhar ações brasileiras, ações americanas e criptomoedas.
 
-## Versão 0.2
+## Versão 0.3
 
-A versão 0.2 mantém a integração básica com a Twelve Data, a Brapi e a
-CoinGecko e inicia a estrutura de persistência dos ativos com Spring Data JPA.
+A versão 0.3 mantém a integração básica com a Twelve Data, a Brapi e a
+CoinGecko e organiza a persistência dos ativos com Spring Data JPA.
 
 Nesta versão:
 
@@ -26,8 +26,9 @@ Nesta versão:
 - As respostas das APIs são exibidas no console da aplicação;
 - A entidade `Ativo` representa os ativos na tabela `ativos`;
 - O `Repository` permite consultar e persistir ativos;
+- O service `SalvarDados` centraliza a lógica de salvar ou atualizar ativos;
 - O PostgreSQL é utilizado como banco de dados da aplicação;
-- A persistência das cotações coletadas pelos schedulers ainda será
+- A integração do service de persistência com os schedulers ainda será
   implementada;
 - O endpoint `GET /cotacao` está disponível para testes e retorna
   `teste`.
@@ -78,6 +79,8 @@ demo/
     │   │   │   │   └── Repository.java
     │   │   ├── Controllers/
     │   │   │   └── PortController.java
+    │   │   ├── Services/
+    │   │   │   └── SalvarDados.java
     │   │   ├── Scheduleds/
     │   │   │   ├── ScheduledBrapi.java
     │   │   │   ├── ScheduledGecko.java
