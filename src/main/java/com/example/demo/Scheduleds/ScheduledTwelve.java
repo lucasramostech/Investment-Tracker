@@ -21,7 +21,7 @@ public class ScheduledTwelve {
 
     private int tickerIndex;
   
-    // Construtor
+    // Construtor  
     public ScheduledTwelve(TwelveDataRequest twelveRequest) {
         this.twelveRequest = twelveRequest;
     }

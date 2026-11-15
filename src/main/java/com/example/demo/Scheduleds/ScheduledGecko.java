@@ -25,4 +25,5 @@ public class ScheduledGecko {
         System.out.println("Consultando CoinGecko");
         coinRequest.puxarDadosGecko();
     }
+    
 }
