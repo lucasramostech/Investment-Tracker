@@ -1,5 +1,7 @@
 package com.example.demo.DatabaseFolder;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,15 +17,15 @@ public class Ativo {
     @Column(name = "ticker", length = 10, nullable = false)
     private String ticker;
 
-    @Column(name = "preco_atual", nullable=false)
-    private Double precoAtual;
+    @Column(name = "preco_atual", nullable = false, precision = 19, scale = 4)
+    private BigDecimal precoAtual;
 
     
     public Ativo() {
     }
 
     // Construtor da table
-    public Ativo(String ticker, Double precoAtual) {
+    public Ativo(String ticker, BigDecimal precoAtual) {
         this.ticker = ticker;
         this.precoAtual = precoAtual;
     }
@@ -45,11 +47,11 @@ public class Ativo {
         this.ticker = ticker; 
     }
 
-    public Double getPrecoAtual() {
+    public BigDecimal getPrecoAtual() {
         return precoAtual;
     }
 
-    public void setPrecoAtual(Double precoAtual) {
+    public void setPrecoAtual(BigDecimal precoAtual) {
         this.precoAtual = precoAtual;
     }
 }

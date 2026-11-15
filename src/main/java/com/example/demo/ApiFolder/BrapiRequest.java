@@ -3,6 +3,7 @@ package com.example.demo.ApiFolder;
 
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class BrapiRequest {
 
 
     // Função que vai puxar os dados
-    public Double puxarDadosBrapi(String ticker) {
+    public BigDecimal puxarDadosBrapi(String ticker) {
 
         System.out.println("\n======================= BRAPI =======================");
         System.out.println("Ticker: " + ticker.trim().toUpperCase());
@@ -42,7 +43,9 @@ public class BrapiRequest {
             List<Map<String, Object>> results =
                     (List<Map<String, Object>>) resposta.get("results");
 
-            Double preco = ((Number) results.get(0).get("regularMarketPrice")).doubleValue();
+            BigDecimal preco = new BigDecimal(
+                results.get(0).get("regularMarketPrice").toString()
+            );
 
             System.out.println("Preço: " + preco);
             return preco;

@@ -1,5 +1,8 @@
 package com.example.demo.ApiFolder;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
@@ -15,7 +18,7 @@ public class TwelveDataRequest {
     private final RestTemplate restTemplate = new RestTemplate();
 
     // Metodo que vai puxar os dados da API do twelve Data;
-    public String puxarDadosTwelve(String ticker) {
+    public BigDecimal puxarDadosTwelve(String ticker) {
 
         System.out.println("\n==================== TWELVE DATA ====================");
         System.out.println("Ticker: " + ticker.trim().toUpperCase());
@@ -28,9 +31,16 @@ public class TwelveDataRequest {
                 this.apiKey
             );
 
-            String resposta = restTemplate.getForObject(url, String.class);
-            System.out.println("Resposta: " + resposta);
-            return resposta;
+            Map<String, Object> resposta = restTemplate.getForObject(url, Map.class);
+            Object valor = resposta.get("price");
+
+            if (valor == null) {
+                throw new IllegalStateException("A resposta da Twelve Data não contém o campo price.");
+            }
+
+            BigDecimal preco = new BigDecimal(valor.toString());
+            System.out.println("Preço: " + preco);
+            return preco;
         } catch (RestClientException exception) {
             throw new IllegalStateException("Erro ao consultar a Twelve Data.", exception);
         } finally {
