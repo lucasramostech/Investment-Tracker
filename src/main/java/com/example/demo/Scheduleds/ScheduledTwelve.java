@@ -7,12 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.example.demo.ApiFolder.*;
+import com.example.demo.Services.SalvarDados;
 
 @Component 
 public class ScheduledTwelve {
 
     // Injeção
     private final TwelveDataRequest twelveRequest;
+    private final SalvarDados salvarDados;
     
 
     // Lista twelve data
@@ -22,19 +24,23 @@ public class ScheduledTwelve {
     private int tickerIndex;
   
     // Construtor  
-    public ScheduledTwelve(TwelveDataRequest twelveRequest) {
+    public ScheduledTwelve(TwelveDataRequest twelveRequest, SalvarDados salvarDados) {
         this.twelveRequest = twelveRequest;
+        this.salvarDados = salvarDados;
     }
-
+    // Just for while
     // Agendamento pra consumo de api
-    @Scheduled(fixedRate = 15000)
+    @Scheduled(fixedRate = 15000000)
 
     // Método pra consumir a api da twelve Data
     public void mostrarDadosTwelve() {
 
         String ticker = tickers.get(tickerIndex);
         System.out.println("Consultando Twelve Data: " + ticker);
-        twelveRequest.puxarDadosTwelve(ticker);
+        salvarDados.salvarOuAtualizar(
+                ticker,
+                twelveRequest.puxarDadosTwelve(ticker)
+        );
 
         tickerIndex = (tickerIndex + 1) % tickers.size();
     }

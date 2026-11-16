@@ -14,7 +14,7 @@ public class Ativo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ticker", length = 10, nullable = false)
+    @Column(name = "ticker",nullable = false)
     private String ticker;
 
     @Column(name = "preco_atual", nullable = false, precision = 19, scale = 4)

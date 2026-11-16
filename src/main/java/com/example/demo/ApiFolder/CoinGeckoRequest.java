@@ -21,7 +21,7 @@ public class CoinGeckoRequest {
     private final RestTemplate restTemplate = new RestTemplate();
 
     // Função que vai puxar as cryptos
-    public Map<String, Map<String, BigDecimal>> puxarDadosGecko() {
+    public Map<String, Map<String, Object>> puxarDadosGecko() {
 
         System.out.println("\n===================== COINGECKO =====================");
 
@@ -32,7 +32,7 @@ public class CoinGeckoRequest {
                 tickersCrypto.trim().toLowerCase()
             );
 
-            Map<String, Map<String, BigDecimal>> resposta = restTemplate.getForObject(url, Map.class);
+            Map<String, Map<String, Object>> resposta = restTemplate.getForObject(url, Map.class);
             System.out.println("Resposta: " + resposta);
             return resposta;
         } catch (RestClientException exception) {
