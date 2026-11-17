@@ -29,15 +29,22 @@ public class ScheduledGecko {
     // Método pra consumir a api da CoinGecko
     public void mostrarDadosGecko() {
         System.out.println("Consultando CoinGecko");
-        Map<String, Map<String, Object>> cotacoes = coinRequest.puxarDadosGecko();
 
-        cotacoes.forEach((ticker, valores) -> {
-            Object valor = valores.get("usd");
-            if (valor instanceof Number) {
-                BigDecimal preco = new BigDecimal(valor.toString());
-                salvarDados.salvarOuAtualizar(ticker, preco);
-            }
-        });
+
+        // Chamada da API com tratamento de erro
+        try {
+            Map<String, Map<String, Object>> cotacoes = coinRequest.puxarDadosGecko();
+
+            cotacoes.forEach((ticker, valores) -> {
+                Object valor = valores.get("usd");
+                if (valor instanceof Number) {
+                    BigDecimal preco = new BigDecimal(valor.toString());
+                    salvarDados.salvarOuAtualizar(ticker, preco);
+                }
+            });
+        } finally {
+            System.out.println("Consulta da CoinGecko finalizada");
+        }
     }
     
 }
