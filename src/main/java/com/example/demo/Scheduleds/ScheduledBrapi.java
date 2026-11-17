@@ -35,12 +35,14 @@ public class ScheduledBrapi {
     // Método para consumir um ticker da Brapi
     public void mostrarDados() {
         String tickerBr = tickersBr.get(tickerBrIndex);
-        System.out.println("Consultando Brapi: " + tickerBr);
-        salvarDados.salvarOuAtualizar(
-                tickerBr,
-                brapiRequest.puxarDadosBrapi(tickerBr)
-        );
-
-        tickerBrIndex = (tickerBrIndex + 1) % tickersBr.size();
+        try {
+            System.out.println("Consultando Brapi: " + tickerBr);
+            salvarDados.salvarOuAtualizar(
+                    tickerBr,
+                    brapiRequest.puxarDadosBrapi(tickerBr)
+            );
+        } finally {
+            tickerBrIndex = (tickerBrIndex + 1) % tickersBr.size();
+        }
     }
 }

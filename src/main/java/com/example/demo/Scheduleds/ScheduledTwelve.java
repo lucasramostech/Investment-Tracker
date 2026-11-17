@@ -30,18 +30,20 @@ public class ScheduledTwelve {
     }
     // Just for while
     // Agendamento pra consumo de api
-    @Scheduled(fixedRate = 15000000)
+    @Scheduled(fixedRate = 15000)
 
     // Método pra consumir a api da twelve Data
     public void mostrarDadosTwelve() {
 
         String ticker = tickers.get(tickerIndex);
-        System.out.println("Consultando Twelve Data: " + ticker);
-        salvarDados.salvarOuAtualizar(
-                ticker,
-                twelveRequest.puxarDadosTwelve(ticker)
-        );
-
-        tickerIndex = (tickerIndex + 1) % tickers.size();
+        try {
+            System.out.println("Consultando Twelve Data: " + ticker);
+            salvarDados.salvarOuAtualizar(
+                    ticker,
+                    twelveRequest.puxarDadosTwelve(ticker)
+            );
+        } finally {
+            tickerIndex = (tickerIndex + 1) % tickers.size();
+        }
     }
 }
