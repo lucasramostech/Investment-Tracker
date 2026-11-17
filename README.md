@@ -11,25 +11,27 @@ apoiar o acompanhamento e a tomada de decisões.
 O projeto consulta cotações por meio de APIs externas e está sendo estruturado
 para acompanhar ações brasileiras, ações americanas e criptomoedas.
 
-## Versão 0.3
+## Versão 0.4
 
-A versão 0.3 mantém a integração básica com a Twelve Data, a Brapi e a
-CoinGecko e organiza a persistência dos ativos com Spring Data JPA.
+A versão 0.4 mantém a integração básica com a Twelve Data, a Brapi e a
+CoinGecko e organiza a persistência dos ativos com Spring Data JPA. Esta versão
+0.4 integra a persistência aos schedulers e melhora o processamento quando uma
+consulta apresenta erro.
 
 Nesta versão:
 
 - Um ticker da Twelve Data é consultado por vez;
 - Um ticker da Brapi é consultado junto com cada ticker da Twelve Data;
-- A consulta seguinte acontece após 15 segundos;
-- Depois que todos os tickers da lista são consultados, a CoinGecko é
-  consultada;
+- A Twelve Data consulta um ticker a cada 15 segundos;
+- A Brapi consulta um ticker a cada 15 segundos;
+- A CoinGecko consulta a lista de criptomoedas a cada 1 minuto;
 - As respostas das APIs são exibidas no console da aplicação;
 - A entidade `Ativo` representa os ativos na tabela `ativos`;
 - O `Repository` permite consultar e persistir ativos;
 - O service `SalvarDados` centraliza a lógica de salvar ou atualizar ativos;
+- Os schedulers salvam ou atualizam os preços retornados pelas APIs;
+- Os índices dos schedulers avançam mesmo quando uma consulta apresenta erro;
 - O PostgreSQL é utilizado como banco de dados da aplicação;
-- A integração do service de persistência com os schedulers ainda será
-  implementada;
 - O endpoint `GET /cotacao` está disponível para testes e retorna
   `teste`.
 
@@ -104,4 +106,4 @@ Para executar os testes:
 ## Licença
 
 Este projeto está disponível sob a
-[Licença MIT](./demo/LICENSE).
+[Licença MIT](./LICENSE).
