@@ -11,15 +11,19 @@ apoiar o acompanhamento e a tomada de decisões.
 O projeto consulta cotações por meio de APIs externas e está sendo estruturado
 para acompanhar ações brasileiras, ações americanas e criptomoedas.
 
-## Versão 0.4
+## Versão 0.5
 
-A versão 0.4 mantém a integração básica com a Twelve Data, a Brapi e a
-CoinGecko e organiza a persistência dos ativos com Spring Data JPA. Esta versão
-0.4 integra a persistência aos schedulers e melhora o processamento quando uma
-consulta apresenta erro.
+A versão 0.5 mantém a integração com a Twelve Data, a Brapi e a CoinGecko,
+organiza a persistência dos ativos com Spring Data JPA e amplia o acompanhamento
+para mais de 300 ativos. Nesta etapa, a configuração contém 319 ativos únicos
+entre ações, ETFs, FIIs e criptomoedas.
 
 Nesta versão:
 
+- O projeto acompanha mais de 300 ativos;
+- A Twelve Data acompanha 138 ações e ETFs;
+- A CoinGecko acompanha 48 criptomoedas;
+- A Brapi acompanha 133 ações e FIIs;
 - Um ticker da Twelve Data é consultado por vez;
 - Um ticker da Brapi é consultado junto com cada ticker da Twelve Data;
 - A Twelve Data consulta um ticker a cada 15 segundos;
