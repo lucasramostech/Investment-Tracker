@@ -30,7 +30,7 @@ public class ScheduledBrapi {
     }
 
     // Agendamento pra consumo de api
-    @Scheduled(fixedRate = 15000)
+    @Scheduled(fixedRateString = "${market-data.fixed-rate-ms}")
 
     // Método para consumir um ticker da Brapi
     public void mostrarDados() {

@@ -24,7 +24,7 @@ public class ScheduledGecko {
     }
 
     // Agendamento pra consumo de api
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRateString = "${market-data.fixed-rate-ms}")
 
     // Método pra consumir a api da CoinGecko
     public void mostrarDadosGecko() {

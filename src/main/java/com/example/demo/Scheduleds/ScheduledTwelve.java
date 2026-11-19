@@ -30,7 +30,7 @@ public class ScheduledTwelve {
     }
     // Just for while
     // Agendamento pra consumo de api
-    @Scheduled(fixedRate = 15000)
+    @Scheduled(fixedRateString = "${market-data.fixed-rate-ms}")
 
     // Método pra consumir a api da twelve Data
     public void mostrarDadosTwelve() {
