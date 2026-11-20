@@ -3,7 +3,9 @@ package com.example.demo.Services;
 import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
-
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 import com.example.demo.DatabaseFolder.Ativo;
 import com.example.demo.DatabaseFolder.Repository;
 
@@ -19,15 +21,24 @@ public class SalvarDados {
         this.database = database;
     }
 
-    // Função simples que salva na table de cotações 
-    public void salvarOuAtualizar(String ticker, BigDecimal preco) {
-        Ativo ativo = database.findByTicker(ticker)
-                .orElse(new Ativo());
+    // Função simples que salva na table de cotações de uma vez
+    public void salvarOuAtualizar(Map<String, BigDecimal> cotacoes) {
+        if (cotacoes == null || cotacoes.isEmpty()) {
+            return;
+        }
 
-        ativo.setTicker(ticker);
-        ativo.setPrecoAtual(preco);
+        // Monta a lista completa e atualiza o DB de uma vez só (em lotes)
+        List<Ativo> ativos = new ArrayList<>();
+        cotacoes.forEach((ticker, preco) -> {
+            Ativo ativo = database.findByTicker(ticker)
+                    .orElse(new Ativo());
 
-        database.save(ativo);
+            ativo.setTicker(ticker);
+            ativo.setPrecoAtual(preco);
+
+            ativos.add(ativo);
+        });
+
+        database.saveAll(ativos);
     }
-    
 }

@@ -13,4 +13,10 @@ public class DadosLotes {
         }
         return cotacoes;
     }
+
+    // Função para chamar o salvar dados e salvar em lotes
+    public void loteador(Map<String, BigDecimal> cotacoes) {
+
+        // Chama o salvar dados em lote
+    }
 }
