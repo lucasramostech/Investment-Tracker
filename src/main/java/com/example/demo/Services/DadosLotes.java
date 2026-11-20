@@ -27,11 +27,20 @@ public class DadosLotes {
         return cotacoes;
     }
 
-    // Função para chamar o salvar dados e salvar em lotes
-    public void loteador() {
+    private int contador = 0;
 
-        // Chama o salvar dados em lote
-        salvarDados.salvarOuAtualizar(cotacoes);
-        cotacoes.clear();
+    // Função para chamar o salvar dados e salvar em lotes
+    public void loteador(boolean op) {
+        if (op) {
+            contador++;
+        }
+
+        if (contador >= 3) {
+            salvarDados.salvarOuAtualizar(cotacoes);
+            cotacoes.clear();
+            contador = 0;
+        }
     }
+
+    
 }

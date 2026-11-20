@@ -8,19 +8,19 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.ApiFolder.*;
-import com.example.demo.Services.SalvarDados;
+import com.example.demo.Services.DadosLotes;
 
 @Component 
 public class ScheduledGecko {
 
     // Injeção
     private final CoinGeckoRequest coinRequest;
-    private final SalvarDados salvarDados;
+    private final DadosLotes dadosLotes;
 
     // Construtor
-    public ScheduledGecko(CoinGeckoRequest coinRequest, SalvarDados salvarDados) {
+    public ScheduledGecko(CoinGeckoRequest coinRequest, DadosLotes dadosLotes) {
         this.coinRequest = coinRequest;
-        this.salvarDados = salvarDados;
+        this.dadosLotes = dadosLotes;
     }
 
     // Agendamento pra consumo de api
@@ -39,11 +39,14 @@ public class ScheduledGecko {
                 Object valor = valores.get("usd");
                 if (valor instanceof Number) {
                     BigDecimal preco = new BigDecimal(valor.toString());
-                    salvarDados.salvarOuAtualizar(ticker, preco);
+                    dadosLotes.Buffer(ticker, preco);
                 }
             });
         } finally {
             System.out.println("Consulta da CoinGecko finalizada");
+
+            // Chama o loteador
+            dadosLotes.loteador(true);
         }
     }
     

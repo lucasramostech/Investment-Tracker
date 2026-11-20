@@ -7,14 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.example.demo.ApiFolder.*;
-import com.example.demo.Services.SalvarDados;
+import com.example.demo.Services.DadosLotes;
 
 @Component 
 public class ScheduledTwelve {
 
     // Injeção
     private final TwelveDataRequest twelveRequest;
-    private final SalvarDados salvarDados;
+    private final DadosLotes dadosLotes;
     
 
     // Lista twelve data
@@ -24,9 +24,9 @@ public class ScheduledTwelve {
     private int tickerIndex;
   
     // Construtor  
-    public ScheduledTwelve(TwelveDataRequest twelveRequest, SalvarDados salvarDados) {
+    public ScheduledTwelve(TwelveDataRequest twelveRequest, DadosLotes dadosLotes) {
         this.twelveRequest = twelveRequest;
-        this.salvarDados = salvarDados;
+        this.dadosLotes = dadosLotes;
     }
     // Just for while
     // Agendamento pra consumo de api
@@ -38,12 +38,15 @@ public class ScheduledTwelve {
         String ticker = tickers.get(tickerIndex);
         try {
             System.out.println("Consultando Twelve Data: " + ticker);
-            salvarDados.salvarOuAtualizar(
+            dadosLotes.Buffer(
                     ticker,
                     twelveRequest.puxarDadosTwelve(ticker)
             );
         } finally {
             tickerIndex = (tickerIndex + 1) % tickers.size();
+
+            // Chama o loteador
+            dadosLotes.loteador(true);
         }
     }
 }

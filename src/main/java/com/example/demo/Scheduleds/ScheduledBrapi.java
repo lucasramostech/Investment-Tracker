@@ -7,14 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.example.demo.ApiFolder.*;
-import com.example.demo.Services.SalvarDados;
+import com.example.demo.Services.DadosLotes;
 
 @Component 
 public class ScheduledBrapi {
 
     // Injeção
     private final BrapiRequest brapiRequest;
-    private final SalvarDados salvarDados;
+    private final DadosLotes dadosLotes;
 
     // Lista twelve data
     @Value("${tickersBr}")
@@ -24,9 +24,9 @@ public class ScheduledBrapi {
 
 
     // Construtor
-    public ScheduledBrapi(BrapiRequest brapiRequest, SalvarDados salvarDados) {
+    public ScheduledBrapi(BrapiRequest brapiRequest, DadosLotes dadosLotes) {
         this.brapiRequest = brapiRequest;
-        this.salvarDados = salvarDados;
+        this.dadosLotes = dadosLotes;
     }
 
     // Agendamento pra consumo de api
@@ -37,12 +37,15 @@ public class ScheduledBrapi {
         String tickerBr = tickersBr.get(tickerBrIndex);
         try {
             System.out.println("Consultando Brapi: " + tickerBr);
-            salvarDados.salvarOuAtualizar(
+            dadosLotes.Buffer(
                     tickerBr,
                     brapiRequest.puxarDadosBrapi(tickerBr)
             );
         } finally {
             tickerBrIndex = (tickerBrIndex + 1) % tickersBr.size();
+
+            // Chama o loteador
+            dadosLotes.loteador(true);
         }
     }
 }
