@@ -34,18 +34,25 @@ public class ScheduledBrapi {
 
     // Método para consumir um ticker da Brapi
     public void mostrarDados() {
+        if (tickersBr == null || tickersBr.isEmpty()) {
+            return;
+        }
+
         String tickerBr = tickersBr.get(tickerBrIndex);
+        boolean ultimoTicker = tickerBrIndex == tickersBr.size() - 1;
+
         try {
             System.out.println("Consultando Brapi: " + tickerBr);
-            dadosLotes.Buffer(
+            dadosLotes.buffer(
                     tickerBr,
                     brapiRequest.puxarDadosBrapi(tickerBr)
             );
         } finally {
             tickerBrIndex = (tickerBrIndex + 1) % tickersBr.size();
 
-            // Chama o loteador
-            dadosLotes.loteador(true);
+            if (ultimoTicker) {
+                dadosLotes.marcarCicloCompleto(DadosLotes.BRAPI);
+            }
         }
     }
 }

@@ -34,19 +34,25 @@ public class ScheduledTwelve {
 
     // Método pra consumir a api da twelve Data
     public void mostrarDadosTwelve() {
+        if (tickers == null || tickers.isEmpty()) {
+            return;
+        }
 
         String ticker = tickers.get(tickerIndex);
+        boolean ultimoTicker = tickerIndex == tickers.size() - 1;
+
         try {
             System.out.println("Consultando Twelve Data: " + ticker);
-            dadosLotes.Buffer(
+            dadosLotes.buffer(
                     ticker,
                     twelveRequest.puxarDadosTwelve(ticker)
             );
         } finally {
             tickerIndex = (tickerIndex + 1) % tickers.size();
 
-            // Chama o loteador
-            dadosLotes.loteador(true);
+            if (ultimoTicker) {
+                dadosLotes.marcarCicloCompleto(DadosLotes.TWELVE_DATA);
+            }
         }
     }
 }

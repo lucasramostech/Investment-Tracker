@@ -39,14 +39,12 @@ public class ScheduledGecko {
                 Object valor = valores.get("usd");
                 if (valor instanceof Number) {
                     BigDecimal preco = new BigDecimal(valor.toString());
-                    dadosLotes.Buffer(ticker, preco);
+                    dadosLotes.buffer(ticker, preco);
                 }
             });
         } finally {
             System.out.println("Consulta da CoinGecko finalizada");
-
-            // Chama o loteador
-            dadosLotes.loteador(true);
+            dadosLotes.marcarCicloCompleto(DadosLotes.COIN_GECKO);
         }
     }
     

@@ -1,46 +1,52 @@
 package com.example.demo.Services;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
-import com.example.demo.Services.SalvarDados;
 
-@Component 
+@Component
 public class DadosLotes {
 
-    // injeçção do file de salvar dados
+    public static final String TWELVE_DATA = "TWELVE_DATA";
+    public static final String BRAPI = "BRAPI";
+    public static final String COIN_GECKO = "COIN_GECKO";
+
     private final SalvarDados salvarDados;
     private final Map<String, BigDecimal> cotacoes = new HashMap<>();
+    private final Set<String> fontesEsperadas = Set.of(TWELVE_DATA, BRAPI, COIN_GECKO);
+    private final Set<String> fontesCompletadas = new HashSet<>();
 
-    // Construtor
     public DadosLotes(SalvarDados salvarDados) {
         this.salvarDados = salvarDados;
     }
 
-
-    // Função para criar o obj
-    public Map<String, BigDecimal> Buffer(String ticker, BigDecimal cotacao) {
+    public synchronized void buffer(String ticker, BigDecimal cotacao) {
         if (ticker != null && cotacao != null) {
             cotacoes.put(ticker, cotacao);
         }
-        return cotacoes;
     }
 
-    private int contador = 0;
-
-    // Função para chamar o salvar dados e salvar em lotes
-    public void loteador(boolean op) {
-        if (op) {
-            contador++;
+    public synchronized void marcarCicloCompleto(String fonte) {
+        if (!fontesEsperadas.contains(fonte)) {
+            return;
         }
 
-        if (contador >= 3) {
-            salvarDados.salvarOuAtualizar(cotacoes);
-            cotacoes.clear();
-            contador = 0;
+        fontesCompletadas.add(fonte);
+        if (!fontesCompletadas.containsAll(fontesEsperadas)) {
+            return;
         }
+
+        if (cotacoes.isEmpty()) {
+            fontesCompletadas.clear();
+            return;
+        }
+
+        salvarDados.salvarOuAtualizar(cotacoes);
+        cotacoes.clear();
+        fontesCompletadas.clear();
     }
-
-    
 }
