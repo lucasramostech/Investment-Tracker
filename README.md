@@ -15,7 +15,7 @@ para acompanhar ações brasileiras, ações americanas e criptomoedas.
 
 A versão 0.5 mantém a integração com a Twelve Data, a Brapi e a CoinGecko,
 organiza a persistência dos ativos com Spring Data JPA e amplia o acompanhamento
-para mais de 300 ativos. Nesta etapa, a configuração contém 319 ativos únicos
+para mais de 300 ativos. Nesta etapa, a configuração contém 314 ativos únicos
 entre ações, ETFs, FIIs e criptomoedas.
 
 Esta versão concentra o consumo das APIs e a atualização dos preços no banco de
