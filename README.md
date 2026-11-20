@@ -18,6 +18,10 @@ organiza a persistência dos ativos com Spring Data JPA e amplia o acompanhament
 para mais de 300 ativos. Nesta etapa, a configuração contém 319 ativos únicos
 entre ações, ETFs, FIIs e criptomoedas.
 
+Esta versão concentra o consumo das APIs e a atualização dos preços no banco de
+dados. Os testes unitários e de integração podem ser implementados em uma etapa
+posterior do desenvolvimento.
+
 Nesta versão:
 
 - O projeto acompanha mais de 300 ativos;
@@ -26,9 +30,11 @@ Nesta versão:
 - A Brapi acompanha 133 ações e FIIs;
 - Um ticker da Twelve Data é consultado por vez;
 - Um ticker da Brapi é consultado junto com cada ticker da Twelve Data;
-- A Twelve Data consulta um ticker a cada 15 segundos;
-- A Brapi consulta um ticker a cada 15 segundos;
-- A CoinGecko consulta a lista de criptomoedas a cada 1 minuto;
+- Os schedulers usam o intervalo configurado pela propriedade
+  `market-data.fixed-rate-ms`;
+- A Twelve Data consulta os tickers configurados um por vez;
+- A Brapi consulta os tickers brasileiros um por vez;
+- A CoinGecko consulta a lista de criptomoedas em uma única chamada;
 - As respostas das APIs são exibidas no console da aplicação;
 - A entidade `Ativo` representa os ativos na tabela `ativos`;
 - O `Repository` permite consultar e persistir ativos;
@@ -36,8 +42,21 @@ Nesta versão:
 - Os schedulers salvam ou atualizam os preços retornados pelas APIs;
 - Os índices dos schedulers avançam mesmo quando uma consulta apresenta erro;
 - O PostgreSQL é utilizado como banco de dados da aplicação;
+- Os dados das APIs são atualizados pelo Hibernate no banco configurado;
 - O endpoint `GET /cotacao` está disponível para testes e retorna
   `teste`.
+
+## Configuração do agendamento
+
+O intervalo dos schedulers é definido em
+[`application.properties`](./src/main/resources/application.properties):
+
+```properties
+market-data.fixed-rate-ms=125217
+```
+
+Os três schedulers utilizam essa propriedade por meio de `fixedRateString`.
+O valor está em milissegundos.
 
 ## Tecnologias
 
@@ -100,6 +119,10 @@ demo/
 ```
 
 ## Testes
+
+Atualmente, o projeto possui um teste de carregamento do contexto Spring.
+Os testes unitários das APIs, dos schedulers e do serviço de persistência ainda
+podem ser adicionados em uma próxima etapa.
 
 Para executar os testes:
 

@@ -8,11 +8,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class DemoApplication {
 
+
+	// Apenas isso >)
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 
-
-		System.out.println("tessste");
 	}
 
 }
