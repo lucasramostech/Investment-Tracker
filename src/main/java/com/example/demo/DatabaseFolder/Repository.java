@@ -1,6 +1,6 @@
 package com.example.demo.DatabaseFolder;
 
-// Repository do projeto
+// Repository a table de cotacoes
 
 import java.util.Optional;
 

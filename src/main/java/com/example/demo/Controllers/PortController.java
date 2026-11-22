@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 import com.example.demo.DTO.*;
 
+
 import com.example.demo.ApiFolder.*;
 
 @RestController
 public class PortController {
 
     // Primeiro endpoint (register)
-    @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> registerUser(@Valid @RequestBody RegisterRequest request) {
-        RegisterResponse response = registerService.register(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    @GetMapping("/teste")
+    public String teste() {
+        System.out.println("Endpoint /teste chamado");
+        return "API funcionando";
     }
 
 
