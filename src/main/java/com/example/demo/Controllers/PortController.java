@@ -3,7 +3,9 @@ package com.example.demo.Controllers;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.example.demo.ApiFolder.*;
 
 @RestController
@@ -17,9 +19,9 @@ public class PortController {
         this.coinRequest = coinRequest;
     }
 
-    // Get para ver o resultado da apia
-    @GetMapping("/cotacao")
-    public String buscarCotacao() {
+    // Primeiro Endpoint (register)
+    @PostMapping("/register")
+    public String registerUser() {
         String datas = "teste";
 
         return datas;
