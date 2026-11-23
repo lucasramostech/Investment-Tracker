@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 import com.example.demo.DTO.*;
+import com.example.demo.Services.RegisterService;
 
 
 import com.example.demo.ApiFolder.*;
@@ -17,11 +18,18 @@ import com.example.demo.ApiFolder.*;
 @RestController
 public class PortController {
 
+    private final RegisterService registerService;
+  
+
+    public PortController(RegisterService registerService) {
+        this.registerService = registerService;
+    }
+
     // Primeiro endpoint (register)
-    @GetMapping("/teste")
-    public String teste() {
-        System.out.println("Endpoint /teste chamado");
-        return "API funcionando";
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@Valid @RequestBody RegisterRequest request) {
+        registerService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado");
     }
 
 

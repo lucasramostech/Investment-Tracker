@@ -48,7 +48,7 @@ public class RegisterService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email já cadastrado");
         }
 
-        // Criptografa a senha
+        // Criptografa a senha p/ segurança
         String hash = passwordEncoder.encode(request.getPassword());
 
         // Salva no banco de dados
