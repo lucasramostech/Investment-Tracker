@@ -30,9 +30,8 @@ Nesta versão também foi iniciada a estrutura de cadastro de usuários:
 - O DTO `RegisterRequest` recebe e valida os dados básicos do cadastro;
 - O service `RegisterAutentication` valida o formato do email e os requisitos
   da senha;
-- O endpoint `GET /teste` confirma que a API está respondendo.
-
-O fluxo completo de cadastro ainda não está conectado ao controller e ao banco.
+- O endpoint `POST /register` valida e salva novos usuários no banco;
+- As senhas são armazenadas usando BCrypt.
 
 Nesta versão:
 
@@ -43,6 +42,7 @@ Nesta versão:
 - A estrutura inicial de usuários foi adicionada;
 - O repositório de usuários permite buscar e verificar usuários;
 - A validação de email e senha foi criada;
+- O cadastro de usuários está disponível pelo endpoint `POST /register`;
 - Um ticker da Twelve Data é consultado por vez;
 - Um ticker da Brapi é consultado junto com cada ticker da Twelve Data;
 - Os schedulers usam o intervalo configurado pela propriedade
@@ -91,7 +91,14 @@ Disponível na versão 1.0
 ```text
 demo/
 ├── pom.xml
+├── mvnw
+├── mvnw.cmd
+├── .gitattributes
+├── .gitignore
 ├── .env
+├── HELP.md
+├── LICENSE
+├── README.md
 └── src/
     ├── main/
     │   ├── java/com/example/demo/
@@ -99,6 +106,8 @@ demo/
     │   │   │   ├── BrapiRequest.java
     │   │   │   ├── CoinGeckoRequest.java
     │   │   │   └── TwelveDataRequest.java
+    │   │   ├── Configs/
+    │   │   │   └── PasswordConfig.java
     │   │   ├── Controllers/
     │   │   │   └── PortController.java
     │   │   ├── DatabaseFolder/
@@ -111,6 +120,7 @@ demo/
     │   │   ├── Services/
     │   │   │   ├── DadosLotes.java
     │   │   │   ├── RegisterAutentication.java
+    │   │   │   ├── RegisterService.java
     │   │   │   └── SalvarDados.java
     │   │   ├── Scheduleds/
     │   │   │   ├── ScheduledBrapi.java
