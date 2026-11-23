@@ -58,7 +58,8 @@ Nesta versão:
 - Os índices dos schedulers avançam mesmo quando uma consulta apresenta erro;
 - O PostgreSQL é utilizado como banco de dados da aplicação;
 - Os dados das APIs são atualizados pelo Hibernate no banco configurado;
-- O endpoint `GET /cotacao` está disponível para testes e retorna
+- `POST /register`: cria um usuário (e-mail, senha e confirmação).
+
   `teste`.
 
 
