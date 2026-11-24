@@ -11,56 +11,28 @@ apoiar o acompanhamento e a tomada de decisões.
 O projeto consulta cotações por meio de APIs externas e está sendo estruturado
 para acompanhar ações brasileiras, ações americanas e criptomoedas.
 
-## Versão 0.5.5
+## Versão 0.6
 
-A versão 0.5.5 mantém a integração com a Twelve Data, a Brapi e a CoinGecko,
-organiza a persistência dos ativos com Spring Data JPA e amplia o acompanhamento
-para mais de 300 ativos. Nesta etapa, a configuração contém 314 ativos únicos
-entre ações, ETFs, FIIs e criptomoedas.
+A versão 0.6 mantém a integração com Twelve Data, Brapi e CoinGecko, a
+persistência de cotações no PostgreSQL e o cadastro inicial de usuários.
+Também adiciona a estrutura de domínio para carteiras de investimento e suas
+posições.
 
-Esta versão concentra o consumo das APIs e a atualização dos preços no banco de
-dados. Os testes unitários e de integração podem ser implementados em uma etapa
-posterior do desenvolvimento.
+### Funcionalidades e estrutura adicionadas
 
-Nesta versão também foi iniciada a estrutura de cadastro de usuários:
-
-- A entidade `UsersTable` representa os usuários na tabela `users`;
-- O `UsersRepository` permite consultar usuários pelo nome de usuário;
-- O `UsersRepository` permite verificar se um nome de usuário já existe;
-- O DTO `RegisterRequest` recebe e valida os dados básicos do cadastro;
-- O service `RegisterAutentication` valida o formato do email e os requisitos
-  da senha;
-- O endpoint `POST /register` valida e salva novos usuários no banco;
-- As senhas são armazenadas usando BCrypt.
-
-Nesta versão:
-
-- O projeto acompanha mais de 300 ativos;
-- A Twelve Data acompanha 138 ações e ETFs;
-- A CoinGecko acompanha 48 criptomoedas;
-- A Brapi acompanha 133 ações e FIIs;
-- A estrutura inicial de usuários foi adicionada;
-- O repositório de usuários permite buscar e verificar usuários;
-- A validação de email e senha foi criada;
-- O cadastro de usuários está disponível pelo endpoint `POST /register`;
-- Um ticker da Twelve Data é consultado por vez;
-- Um ticker da Brapi é consultado junto com cada ticker da Twelve Data;
-- Os schedulers usam o intervalo configurado pela propriedade
-  `market-data.fixed-rate-ms`;
-- A Twelve Data consulta os tickers configurados um por vez;
-- A Brapi consulta os tickers brasileiros um por vez;
-- A CoinGecko consulta a lista de criptomoedas em uma única chamada;
-- As respostas das APIs são exibidas no console da aplicação;
-- A entidade `Ativo` representa os ativos na tabela `ativos`;
-- O `Repository` permite consultar e persistir ativos;
-- O service `SalvarDados` centraliza a lógica de salvar ou atualizar ativos;
-- Os schedulers salvam ou atualizam os preços retornados pelas APIs;
-- Os índices dos schedulers avançam mesmo quando uma consulta apresenta erro;
-- O PostgreSQL é utilizado como banco de dados da aplicação;
-- Os dados das APIs são atualizados pelo Hibernate no banco configurado;
-- `POST /register`: cria um usuário (e-mail, senha e confirmação).
-
-  `teste`.
+- A entidade `Wallet` representa uma carteira vinculada a um usuário;
+- A entidade `Position` representa um ativo e sua quantidade dentro de uma
+  carteira;
+- Cada posição é associada a uma carteira, e um ticker pode aparecer no máximo
+  uma vez por carteira;
+- `WalletRepository` permite buscar carteiras por usuário e validar a
+  propriedade de uma carteira;
+- `PositionRepository` permite listar posições e buscar uma posição por
+  carteira e ticker;
+- O cadastro de usuários permanece disponível pelo endpoint `POST /register`,
+  com validação dos dados e senha armazenada usando BCrypt;
+- As cotações continuam sendo consultadas pelos agendadores e salvas no banco
+  por meio do serviço `SalvarDados`.
 
 
 ## Tecnologias
@@ -84,10 +56,10 @@ Nesta versão:
 
 ## Como executar
 
-Disponível na versão 1.0
+As instruções de execução serão documentadas em uma versão futura.
 
 
-## Estrutura principal
+## Estrutura de arquivos
 
 ```text
 demo/
@@ -114,6 +86,10 @@ demo/
     │   │   ├── DatabaseFolder/
     │   │   │   ├── Ativo.java
     │   │   │   ├── Repository.java
+    │   │   │   ├── Position.java
+    │   │   │   ├── PositionRepository.java
+    │   │   │   ├── Wallet.java
+    │   │   │   ├── WalletRepository.java
     │   │   │   ├── UsersTable.java
     │   │   │   └── UsersRepository.java
     │   │   ├── DTO/
