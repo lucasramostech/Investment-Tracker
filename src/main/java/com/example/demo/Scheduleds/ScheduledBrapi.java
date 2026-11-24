@@ -41,6 +41,8 @@ public class ScheduledBrapi {
         String tickerBr = tickersBr.get(tickerBrIndex);
         boolean ultimoTicker = tickerBrIndex == tickersBr.size() - 1;
 
+
+        // Tratamento de erros
         try {
             System.out.println("Consultando Brapi: " + tickerBr);
             dadosLotes.buffer(

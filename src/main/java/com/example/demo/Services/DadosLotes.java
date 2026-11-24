@@ -35,6 +35,7 @@ public class DadosLotes {
         }
     }
     
+    // Função que identifica o retorno das 3 apis
     public synchronized void marcarCicloCompleto(String fonte) {
         if (!fontesEsperadas.contains(fonte)) {
             return;

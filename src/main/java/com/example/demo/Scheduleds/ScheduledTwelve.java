@@ -41,6 +41,7 @@ public class ScheduledTwelve {
         String ticker = tickers.get(tickerIndex);
         boolean ultimoTicker = tickerIndex == tickers.size() - 1;
 
+        // tratamento de erros da twelve data
         try {
             System.out.println("Consultando Twelve Data: " + ticker);
             dadosLotes.buffer(
