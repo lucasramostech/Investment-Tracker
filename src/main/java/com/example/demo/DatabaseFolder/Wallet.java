@@ -17,10 +17,10 @@ public class Wallet {
     @Column(name = "name", nullable = false)
     private String name;
 
-    // Dono da carteira (coluna user_id aponta para o id do usuário)
+    // Dono da carteira 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UsersTable user;
 
     // Ativos da carteira
     @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,7 +32,7 @@ public class Wallet {
 
 
     // Cnstrutor
-    public Wallet(String name, User user) {
+    public Wallet(String name, UsersTable user) {
         this.name = name;
         this.user = user;
     }
@@ -50,11 +50,11 @@ public class Wallet {
         this.name = name;
     }
 
-    public User getUser() {
+    public UsersTable getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UsersTable user) {
         this.user = user;
     }
 

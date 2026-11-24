@@ -20,7 +20,6 @@ public class UsersTable {
     private String password;
 
 
-
     public UsersTable() {
     }
 
