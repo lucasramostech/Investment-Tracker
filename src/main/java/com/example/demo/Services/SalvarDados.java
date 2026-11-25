@@ -6,8 +6,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
-import com.example.demo.DatabaseFolder.Ativo;
-import com.example.demo.DatabaseFolder.Repository;
+
+import com.example.demo.DatabaseFolder.Entitys.Ativo;
+import com.example.demo.DatabaseFolder.Repositorys.Repository;
 
 
 @Service

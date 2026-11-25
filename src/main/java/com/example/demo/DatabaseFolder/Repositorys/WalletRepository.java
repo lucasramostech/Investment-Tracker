@@ -1,6 +1,9 @@
-package com.example.demo.DatabaseFolder;
+package com.example.demo.DatabaseFolder.Repositorys;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.DatabaseFolder.Entitys.Wallet;
+
 import java.util.List;
 import java.util.Optional;
 

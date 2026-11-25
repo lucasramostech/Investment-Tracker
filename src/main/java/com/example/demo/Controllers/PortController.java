@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 import com.example.demo.DTO.*;
-import com.example.demo.Services.RegisterService;
+import com.example.demo.Services.Auth.RegisterService;
 
 
 @RestController

@@ -1,4 +1,4 @@
-package com.example.demo.DatabaseFolder;
+package com.example.demo.DatabaseFolder.Entitys;
 
 import jakarta.persistence.*;
 
@@ -17,7 +17,7 @@ public class UsersTable {
 
     // Guarda o hash criptografado
     @Column(name = "password", nullable = false)
-    private String password;
+    private String password; 
 
 
     public UsersTable() {

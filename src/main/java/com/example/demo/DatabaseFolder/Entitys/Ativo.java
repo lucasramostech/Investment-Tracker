@@ -1,4 +1,4 @@
-package com.example.demo.DatabaseFolder;
+package com.example.demo.DatabaseFolder.Entitys;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package com.example.demo.Services;
+package com.example.demo.Services.Auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.DTO.RegisterRequest;
-import com.example.demo.DatabaseFolder.UsersRepository;
-import com.example.demo.DatabaseFolder.UsersTable;
+import com.example.demo.DatabaseFolder.Entitys.UsersTable;
+import com.example.demo.DatabaseFolder.Repositorys.UsersRepository;
 
 
 // Service que vai salvar o users na table db
