@@ -66,6 +66,9 @@ demo/
 ├── pom.xml
 ├── mvnw
 ├── mvnw.cmd
+├── .mvn/
+│   └── wrapper/
+│       └── maven-wrapper.properties
 ├── .gitattributes
 ├── .gitignore
 ├── .env
@@ -84,21 +87,25 @@ demo/
     │   │   ├── Controllers/
     │   │   │   └── PortController.java
     │   │   ├── DatabaseFolder/
-    │   │   │   ├── Ativo.java
-    │   │   │   ├── Repository.java
-    │   │   │   ├── Position.java
-    │   │   │   ├── PositionRepository.java
-    │   │   │   ├── Wallet.java
-    │   │   │   ├── WalletRepository.java
-    │   │   │   ├── UsersTable.java
-    │   │   │   └── UsersRepository.java
+    │   │   │   ├── Entitys/
+    │   │   │   │   ├── Ativo.java
+    │   │   │   │   ├── Position.java
+    │   │   │   │   ├── UsersTable.java
+    │   │   │   │   └── Wallet.java
+    │   │   │   └── Repositorys/
+    │   │   │       ├── PositionRepository.java
+    │   │   │       ├── Repository.java
+    │   │   │       ├── UsersRepository.java
+    │   │   │       └── WalletRepository.java
     │   │   ├── DTO/
     │   │   │   └── RegisterRequest.java
     │   │   ├── Services/
-    │   │   │   ├── DadosLotes.java
-    │   │   │   ├── RegisterAutentication.java
-    │   │   │   ├── RegisterService.java
-    │   │   │   └── SalvarDados.java
+    │   │   │   └── Auth/
+    │   │   │       ├── RegisterAutentication.java
+    │   │   │       ├── RegisterService.java
+    │   │   │       └── BusinessRules/
+    │   │   │           ├── DadosLotes.java
+    │   │   │           └── SalvarDados.java
     │   │   ├── Scheduleds/
     │   │   │   ├── ScheduledBrapi.java
     │   │   │   ├── ScheduledGecko.java
