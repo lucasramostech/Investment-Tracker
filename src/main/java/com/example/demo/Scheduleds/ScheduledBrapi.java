@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.example.demo.ApiFolder.*;
-import com.example.demo.Services.DadosLotes;
+import com.example.demo.Services.Auth.BusinessRules.DadosLotes;
 
 @Component 
 public class ScheduledBrapi {

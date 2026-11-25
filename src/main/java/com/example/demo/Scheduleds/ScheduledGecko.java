@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.ApiFolder.*;
-import com.example.demo.Services.DadosLotes;
+import com.example.demo.Services.Auth.BusinessRules.DadosLotes;
 
 @Component 
 public class ScheduledGecko {

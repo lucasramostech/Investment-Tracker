@@ -1,4 +1,4 @@
-package com.example.demo.Services;
+package com.example.demo.Services.Auth.BusinessRules;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
